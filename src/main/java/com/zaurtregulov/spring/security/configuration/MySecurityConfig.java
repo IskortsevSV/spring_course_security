@@ -19,12 +19,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override // аунтификация
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //дефолтное шифрование паролей
-        UserBuilder userBuilder = User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser(userBuilder.username("zaur").password("zaur").roles("EMPLOYEE"))
-                .withUser(userBuilder.username("elena").password("elena").roles("HR"))
-                .withUser(userBuilder.username("ivan").password("ivan").roles("MANAGER", "HR"));
+        //берем информация о юзерах из БД
+        auth.jdbcAuthentication().dataSource(dataSource);
 
     }
 
