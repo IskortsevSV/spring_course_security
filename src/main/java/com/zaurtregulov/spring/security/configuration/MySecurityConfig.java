@@ -1,5 +1,6 @@
 package com.zaurtregulov.spring.security.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -7,9 +8,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
+import javax.sql.DataSource;
+
 //тут будут прописана username and password нашей компании
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    DataSource dataSource;
+
     @Override // аунтификация
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //дефолтное шифрование паролей
